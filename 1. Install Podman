@@ -1,4 +1,4 @@
-[deni@localhost Python]$ sudo yum install yum-utils
+- [deni@localhost Python]$ sudo yum install yum-utils
 Last metadata expiration check: 1:22:07 ago on Fri 11 Aug 2023 09:26:57 AM WIB.
 Dependencies resolved.
 ================================================================================
@@ -39,7 +39,122 @@ Installed:
   yum-utils-4.3.0-9.el9.noarch
 
 Complete!
-[deni@localhost Python]$ sudo yum update
+
+- [deni@localhost Python]$ sudo yum update
 Dependencies resolved.
 Nothing to do.
 Complete!
+
+[deni@localhost Python]$ sudo yum install docker
+Last metadata expiration check: 1:25:23 ago on Fri 11 Aug 2023 09:26:57 AM WIB.
+Dependencies resolved.
+================================================================================
+ Package              Architecture  Version              Repository        Size
+================================================================================
+Installing:
+ podman-docker        noarch        2:4.6.0-3.el9        appstream         66 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 66 k
+Installed size: 10 k
+Is this ok [y/N]: y
+Downloading Packages:
+podman-docker-4.6.0-3.el9.noarch.rpm             31 kB/s |  66 kB     00:02
+--------------------------------------------------------------------------------
+Total                                            23 kB/s |  66 kB     00:02
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Installing       : podman-docker-2:4.6.0-3.el9.noarch                     1/1
+  Running scriptlet: podman-docker-2:4.6.0-3.el9.noarch                     1/1
+  Verifying        : podman-docker-2:4.6.0-3.el9.noarch                     1/1
+
+Installed:
+  podman-docker-2:4.6.0-3.el9.noarch
+
+Complete!
+
+- [deni@localhost Python]$ sudo systemctl start podman
+
+- [deni@localhost Python]$ sudo podman run hello-world
+Resolved "hello-world" as an alias (/etc/containers/registries.conf.d/000-shortn  ames.conf)
+Trying to pull quay.io/podman/hello:latest...
+Getting image source signatures
+Copying blob 8730226d486e done   |
+Copying config a903f94120 done   |
+Writing manifest to image destination
+!... Hello Podman World ...!
+
+         .--"--.
+       / -     - \
+      / (O)   (O) \
+   ~~~| -=(,Y,)=- |
+    .---. /`  \   |~~
+ ~/  o  o \~~~~.----. ~~
+  | =(X)= |~  / (O (O) \
+   ~~~~~~~  ~| =(Y_)=-  |
+  ~~~~    ~~~|   U      |~~
+
+Project:   https://github.com/containers/podman
+Website:   https://podman.io
+Documents: https://docs.podman.io
+Twitter:   @Podman_io
+
+Download the official image
+- [deni@localhost Python]$ podman pull centos:stream9
+Resolved "centos" as an alias (/etc/containers/registries.conf.d/000-shortnames.conf)
+Trying to pull quay.io/centos/centos:stream9...
+Getting image source signatures
+Copying blob 08946854a96c done   |
+Copying config e5fd442495 done   |
+Writing manifest to image destination
+e5fd442495fcca22121e24a0a07023f46101d274dc8362c1880c20b0a78be5f5
+
+[deni@localhost Python]$ podman image ls
+REPOSITORY             TAG         IMAGE ID      CREATED     SIZE
+quay.io/centos/centos  stream9     e5fd442495fc  3 days ago  160 MB
+[deni@localhost Python]$ podman run e5fd442495fc /bin/echo "Testing Aja"
+Testing Aja
+
+Connect to the interactive session of a Container with [i] and [t] option like follows.
+If [exit] from the Container session, the process of a Container finishes.
+[deni@localhost Python]$ podman run -it e5fd442495fc /bin/bash
+[root@02492b9bbaec /]# uname -a
+Linux 02492b9bbaec 5.14.0-350.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Aug 4 12:40:09 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+[root@02492b9bbaec /]# exit
+
+If you'd like to run a Container as a Daemon, add [d] option.
+[deni@localhost Python]$ podman run -itd e5fd442495fc /bin/bash
+9c9f0eee6313594d96e6e54bca87ab0c698bf76a301ce391329a6293a3cbe3d5
+
+# show podman proceses
+[deni@localhost Python]$ podman ps
+CONTAINER ID  IMAGE                          COMMAND     CREATED         STATUS         PORTS       NAMES
+9c9f0eee6313  quay.io/centos/centos:stream9  /bin/bash   10 seconds ago  Up 11 seconds              modest_lumiere
+
+# attach to container session
+[deni@localhost Python]$ podman exec -it 9c9f0eee6313 /bin/bash
+[root@9c9f0eee6313 /]# exit
+exit
+
+# stop container process (if force stop, specify [kill])
+[deni@localhost Python]$ podman stop 9c9f0eee6313
+WARN[0010] StopSignal SIGTERM failed to stop container modest_lumiere in 10 seconds, resorting to SIGKILL
+9c9f0eee6313
+[deni@localhost Python]$ podman ps
+CONTAINER ID  IMAGE       COMMAND     CREATED     STATUS      PORTS       NAMES
+[deni@localhost Python]$
+
+
+
+
+
+
+
+
