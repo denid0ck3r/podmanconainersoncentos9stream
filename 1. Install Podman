@@ -1,0 +1,45 @@
+[deni@localhost Python]$ sudo yum install yum-utils
+Last metadata expiration check: 1:22:07 ago on Fri 11 Aug 2023 09:26:57 AM WIB.
+Dependencies resolved.
+================================================================================
+ Package            Architecture    Version               Repository       Size
+================================================================================
+Installing:
+ yum-utils          noarch          4.3.0-9.el9           baseos           41 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 41 k
+Installed size: 23 k
+Is this ok [y/N]: y
+Downloading Packages:
+yum-utils-4.3.0-9.el9.noarch.rpm                 34 kB/s |  41 kB     00:01
+--------------------------------------------------------------------------------
+Total                                            21 kB/s |  41 kB     00:01
+CentOS Stream 9 - BaseOS                        530 kB/s | 1.6 kB     00:00
+Importing GPG key 0x8483C65D:
+ Userid     : "CentOS (CentOS Official Signing Key) <security@centos.org>"
+ Fingerprint: 99DB 70FA E1D7 CE22 7FB6 4882 05B5 55B3 8483 C65D
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
+Is this ok [y/N]: y
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Installing       : yum-utils-4.3.0-9.el9.noarch                           1/1
+  Running scriptlet: yum-utils-4.3.0-9.el9.noarch                           1/1
+  Verifying        : yum-utils-4.3.0-9.el9.noarch                           1/1
+
+Installed:
+  yum-utils-4.3.0-9.el9.noarch
+
+Complete!
+[deni@localhost Python]$ sudo yum update
+Dependencies resolved.
+Nothing to do.
+Complete!
